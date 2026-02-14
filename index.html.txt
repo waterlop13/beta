@@ -1,0 +1,59 @@
+<style>
+/* Confetti styles */
+.confetti {
+  position: absolute;
+  width: 6px;
+  height: 12px;
+  background-color: red;
+  opacity: 0.9;
+  pointer-events: none;
+  transform-origin: center;
+  border-radius: 2px;
+}
+</style>
+
+<script>
+yesButton.addEventListener("click", () => {
+  alert("Happy Valentine's Day my love. Every video call, every message with you makes me realize I want to spend my life with you. I choose you every day and I'm so grateful to have you in my life ❤️");
+
+  const confettiCount = 120;
+
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+
+    // Random size
+    confetti.style.width = 5 + Math.random() * 5 + "px";
+    confetti.style.height = 8 + Math.random() * 8 + "px";
+
+    // Random color
+    const hue = Math.random() * 360;
+    confetti.style.backgroundColor = `hsl(${hue}, 70%, 60%)`;
+
+    // Starting position
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.top = "-20px";
+
+    // Random rotation
+    const rotate = Math.random() * 360;
+    confetti.style.transform = `rotate(${rotate}deg)`;
+
+    document.body.appendChild(confetti);
+
+    // Animate falling and rotating
+    const fallDuration = 2 + Math.random() * 3; // 2-5 seconds
+    confetti.animate([
+      { transform: `translateY(0px) rotate(${rotate}deg)`, opacity: 1 },
+      { transform: `translateY(${window.innerHeight + 50}px) rotate(${rotate + 720}deg)`, opacity: 0 }
+    ], {
+      duration: fallDuration * 1000,
+      easing: "cubic-bezier(0.5, 0, 0.5, 1)",
+      iterations: 1,
+      fill: "forwards"
+    });
+
+    // Remove confetti after falling
+    setTimeout(() => confetti.remove(), fallDuration * 1000);
+  }
+});
+</script>
